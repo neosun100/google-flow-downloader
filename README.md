@@ -16,6 +16,14 @@
 
 ## 安装
 
+### 方式 1：从本地安装（推荐）
+
+```bash
+pipx install ~/Code/GenAI/google-flow-downloader
+```
+
+### 方式 2：从 PyPI 安装（即将支持）
+
 ```bash
 pipx install google-flow-downloader
 ```
