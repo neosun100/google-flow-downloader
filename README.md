@@ -1,88 +1,134 @@
-# Google Flow Downloader
+<div align="center">
 
-🚀 Google Flow 图片批量下载工具 - 自动去重、增量下载、多项目支持
+# 🎨 Google Flow Downloader
 
-## 简介
+**批量下载 Google Flow 生成的 AI 图片**
 
-这是一个用于批量下载 Google Flow (labs.google/fx/tools/flow) 生成图片的命令行工具。
+[![PyPI version](https://badge.fury.io/py/google-flow-downloader.svg)](https://pypi.org/project/google-flow-downloader/)
+[![Python Version](https://img.shields.io/pypi/pyversions/google-flow-downloader.svg)](https://pypi.org/project/google-flow-downloader/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://pepy.tech/badge/google-flow-downloader)](https://pepy.tech/project/google-flow-downloader)
 
-**核心功能：**
-- ✅ 自动去重 - 下载前检查已有文件，避免重复
-- ✅ 增量下载 - 支持多次运行，只下载新图片
-- ✅ 多项目支持 - 不硬编码项目 ID，支持多个项目
-- ✅ 两种下载方式 - 浏览器脚本（推荐）或 API 直接下载
-- ✅ macOS 优化 - 一键复制脚本到剪贴板
-- ✅ 进度显示 - 实时显示下载进度和状态
+[安装](#-安装) •
+[快速开始](#-快速开始) •
+[功能特性](#-功能特性) •
+[文档](#-文档)
 
-## 安装
+</div>
+
+---
+
+## 📖 简介
+
+Google Flow Downloader 是一个强大的命令行工具，用于批量下载 [Google Flow](https://labs.google/fx/tools/flow) 生成的 AI 图片。
+
+**为什么选择这个工具？**
+
+- 🚀 **自动去重** - 智能检测已下载图片，避免重复
+- 📦 **增量下载** - 支持多次运行，只下载新图片
+- 🎯 **多项目支持** - 轻松管理多个 Google Flow 项目
+- 💻 **macOS 优化** - 一键复制脚本到剪贴板
+- 📊 **进度显示** - 实时显示下载进度和状态
+- 🔒 **隐私安全** - 不存储任何凭据信息
+
+---
+
+## 🚀 安装
 
 ```bash
 pipx install google-flow-downloader
 ```
 
-**链接：**
-- 📦 PyPI: https://pypi.org/project/google-flow-downloader/
-- 💻 GitHub: https://github.com/neosun100/google-flow-downloader
+> **要求：** Python 3.8+
 
-## 快速开始
+---
 
-### 方式 1：浏览器脚本（推荐，无需 token）
+## ⚡ 快速开始
 
-这是最简单、最可靠的方式：
+### 方式 1：浏览器脚本（推荐）
+
+最简单、最可靠的方式，无需管理 token：
 
 ```bash
 # 步骤 1: 复制脚本到剪贴板 (macOS)
 gflow script -c
 
-# 步骤 2: 打开 Google Flow 项目页面
-# https://labs.google/fx/tools/flow/project/YOUR_PROJECT_ID
+# 步骤 2: 在浏览器中
+# 1. 打开你的 Google Flow 项目页面
+# 2. 按 F12 → Console 标签
+# 3. Cmd+V 粘贴脚本，回车运行
+# 4. 等待自动滚动完成（会下载 JSON 文件）
 
-# 步骤 3: 按 F12 打开开发者工具 → Console 标签
-
-# 步骤 4: Cmd+V 粘贴脚本，回车运行
-
-# 步骤 5: 等待自动滚动完成（会自动下载 JSON 文件）
-
-# 步骤 6: 下载图片
+# 步骤 3: 批量下载图片
 gflow from-json ~/Downloads/google_flow_complete_XXX.json
 ```
 
-**为什么推荐这种方式？**
-- ✅ 不需要管理 token（token 会过期）
-- ✅ 能获取更多图片（浏览器能滚动加载所有历史数据）
-- ✅ 更稳定（不受 API 限制）
-
-### 方式 2：使用完整 Cookie
+### 方式 2：API 直接下载
 
 适合自动化场景：
 
 ```bash
-# 从浏览器 Network 标签复制 curl 命令中的 Cookie
+# 使用完整 Cookie
 gflow download \
-  --cookie "_ga=xxx; __Secure-next-auth.session-token=xxx; email=xxx; ..." \
+  --cookie "你的完整cookie字符串" \
   --url "https://labs.google/fx/tools/flow/project/YOUR_PROJECT_ID"
-```
 
-### 方式 3：使用 Session Token
-
-```bash
+# 或使用 Token
 gflow download \
-  --token "你的__Secure-next-auth.session-token" \
+  --token "你的session-token" \
   --project-id "你的项目ID"
 ```
 
-## 命令详解
+---
+
+## ✨ 功能特性
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎯 智能去重
+
+自动检测已下载图片，避免重复下载，节省时间和带宽。
+
+</td>
+<td width="50%">
+
+### 📦 增量更新
+
+支持多次运行，每次只下载新增的图片。
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🔄 多项目支持
+
+轻松管理多个 Google Flow 项目，不硬编码项目 ID。
+
+</td>
+<td width="50%">
+
+### 💻 macOS 优化
+
+一键复制脚本到剪贴板，提升使用体验。
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📚 命令详解
 
 ### `gflow script`
 
-显示浏览器提取脚本
+显示或复制浏览器提取脚本
 
 ```bash
-# 显示脚本（手动复制）
-gflow script
-
-# 自动复制到剪贴板 (macOS)
-gflow script -c
+gflow script        # 显示脚本
+gflow script -c     # 复制到剪贴板 (macOS)
 ```
 
 ### `gflow from-json`
@@ -90,11 +136,10 @@ gflow script -c
 从浏览器导出的 JSON 文件下载图片
 
 ```bash
-# 使用默认输出目录
 gflow from-json ~/Downloads/google_flow_complete_242.json
 
 # 自定义输出目录
-gflow from-json ~/Downloads/google_flow_complete_242.json -o ~/Pictures/google_flow
+gflow from-json ~/Downloads/xxx.json -o ~/Pictures/google_flow
 ```
 
 ### `gflow download`
@@ -102,17 +147,13 @@ gflow from-json ~/Downloads/google_flow_complete_242.json -o ~/Pictures/google_f
 从 API 直接下载图片
 
 ```bash
-# 方式 1: 使用完整 Cookie + URL
-gflow download \
-  --cookie "完整cookie字符串" \
-  --url "项目URL"
+# 使用完整 Cookie + URL
+gflow download --cookie "完整cookie" --url "项目URL"
 
-# 方式 2: 使用 Token + Project ID
-gflow download \
-  --token "session-token" \
-  --project-id "项目ID"
+# 使用 Token + Project ID
+gflow download --token "token" --project-id "项目ID"
 
-# 方式 3: 使用环境变量
+# 使用环境变量
 export GFLOW_COOKIE="完整cookie"
 export GFLOW_PROJECT_ID="项目ID"
 gflow download
@@ -123,13 +164,13 @@ gflow download
 查看下载状态
 
 ```bash
-gflow status
-
-# 查看指定目录
-gflow status -o ~/Pictures/google_flow
+gflow status                    # 查看默认目录
+gflow status -o ~/Pictures/     # 查看指定目录
 ```
 
-## 配置
+---
+
+## 🔧 配置
 
 ### 默认输出目录
 
@@ -140,15 +181,17 @@ gflow status -o ~/Pictures/google_flow
 ### 环境变量
 
 ```bash
-# 在 ~/.zshrc 或 ~/.bashrc 中设置
 export GFLOW_COOKIE="完整cookie字符串"
 export GFLOW_SESSION_TOKEN="session token"
 export GFLOW_PROJECT_ID="项目ID"
 ```
 
-## 常见问题
+---
 
-### Q: 如何获取 Cookie？
+## 💡 常见问题
+
+<details>
+<summary><b>如何获取 Cookie？</b></summary>
 
 **方法 1: 从 curl 命令（推荐）**
 1. 打开 Google Flow 项目页面
@@ -162,114 +205,129 @@ export GFLOW_PROJECT_ID="项目ID"
 1. F12 → Application → Cookies → https://labs.google
 2. 手动复制所有 Cookie 拼接成字符串
 
-### Q: 如何获取 Project ID？
+</details>
+
+<details>
+<summary><b>如何获取 Project ID？</b></summary>
 
 从项目 URL 中提取：
 ```
-https://labs.google/fx/tools/flow/project/YOUR_PROJECT_ID
+https://labs.google/fx/tools/flow/project/23497835-f05d-41bd-a0dc-4188c378f521
                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                                           这就是 Project ID
 ```
 
 或使用 `--url` 参数自动提取。
 
-### Q: Token 过期怎么办？
+</details>
+
+<details>
+<summary><b>Token 过期怎么办？</b></summary>
 
 Session token 会定期过期，有两种解决方案：
 
 1. **使用浏览器脚本**（推荐）- 不需要管理 token
 2. **重新获取 token** - 从浏览器复制新的 Cookie
 
-### Q: 支持多个项目吗？
+</details>
 
-支持！每个项目使用不同的 project ID：
+<details>
+<summary><b>支持多个项目吗？</b></summary>
 
-```bash
-# 项目 A
-gflow download --project-id "项目A的ID" --token "xxx" -o ~/flow_project_a
-
-# 项目 B  
-gflow download --project-id "项目B的ID" --token "xxx" -o ~/flow_project_b
-```
-
-### Q: 如何确认下载完整？
+支持！每个项目使用不同的输出目录：
 
 ```bash
-# 查看状态
-gflow status
-
-# 多次运行，如果显示"所有图片已下载"说明完整
-gflow from-json ~/Downloads/google_flow_complete_XXX.json
+gflow download --project-id "项目A" -o ~/flow_project_a
+gflow download --project-id "项目B" -o ~/flow_project_b
 ```
 
-### Q: 图片保存在哪里？
+</details>
 
-默认：`~/Code/GenAI/google_flow_images/`
+---
 
-自定义：使用 `-o` 参数指定
-
-## 工作原理
+## 🛠️ 工作原理
 
 ### 浏览器脚本方式
 
-```
-浏览器运行 JS 脚本
-  ↓
-自动滚动页面
-  ↓
-拦截网络请求，提取图片 URL
-  ↓
-导出 JSON 文件
-  ↓
-Python 批量下载
+```mermaid
+graph LR
+    A[浏览器运行 JS] --> B[自动滚动页面]
+    B --> C[拦截网络请求]
+    C --> D[提取图片 URL]
+    D --> E[导出 JSON]
+    E --> F[Python 批量下载]
 ```
 
 ### API 方式
 
-```
-提供 Cookie/Token + Project ID
-  ↓
-调用 Google Flow API
-  ↓
-获取图片列表（最多 232 张）
-  ↓
-批量下载
+```mermaid
+graph LR
+    A[提供 Cookie/Token] --> B[调用 Google Flow API]
+    B --> C[获取图片列表]
+    C --> D[批量下载]
 ```
 
-## 技术细节
+---
 
-- **去重机制**: 扫描输出目录中的文件名，提取 UUID key，只下载不存在的
-- **文件命名**: `{uuid-key}.jpg`
-- **API 限制**: 单次最多返回 232 张图片
-- **浏览器脚本**: 通过滚动触发懒加载，可获取所有历史图片
+## 📖 文档
 
-## 开发
+- 📘 [完整使用指南](README.md)
+- 🚀 [PyPI 发布最佳实践](docs/PYPI_PUBLISHING_GUIDE.md)
+- ⚡ [快速参考](docs/QUICK_REFERENCE.md)
+- 🔧 [开发指南](docs/DEVELOPMENT.md)
+
+---
+
+## 🧪 测试
 
 ```bash
-# 克隆项目
-git clone https://github.com/google-flow-tools/downloader.git
-cd downloader
-
-# 安装开发版
-pipx install -e .
-
-# 运行测试
-gflow status
+cd google-flow-downloader
+python3 tests/test_all.py
 ```
 
-## 许可证
+所有测试通过 ✅
 
-MIT License
+---
 
-## 贡献
+## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
 
-## 更新日志
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
 
-### v1.0.0 (2026-01-20)
+---
 
-- 初始版本
-- 支持浏览器脚本和 API 两种下载方式
-- 自动去重和增量下载
-- macOS 剪贴板集成
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE.txt](LICENSE.txt) 了解详情
+
+---
+
+## 🙏 致谢
+
+- [Google Labs](https://labs.google/) - 提供 Google Flow 服务
+- [Rich](https://github.com/Textualize/rich) - 美化终端输出
+- [Click](https://click.palletsprojects.com/) - CLI 框架
+
+---
+
+## 📊 统计
+
+![GitHub stars](https://img.shields.io/github/stars/neosun100/google-flow-downloader?style=social)
+![GitHub forks](https://img.shields.io/github/forks/neosun100/google-flow-downloader?style=social)
+![GitHub issues](https://img.shields.io/github/issues/neosun100/google-flow-downloader)
+![GitHub last commit](https://img.shields.io/github/last-commit/neosun100/google-flow-downloader)
+
+---
+
+<div align="center">
+
+**如果这个项目对你有帮助，请给个 ⭐️ Star！**
+
+Made with ❤️ by [neosun100](https://github.com/neosun100)
+
+</div>
