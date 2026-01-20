@@ -1,6 +1,6 @@
 """Google Flow 图片下载工具"""
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 BROWSER_SCRIPT = '''// Google Flow 全自动提取脚本
 // 在浏览器 Console 运行
