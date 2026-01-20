@@ -20,7 +20,9 @@
 pipx install google-flow-downloader
 ```
 
-**PyPI 链接：** https://pypi.org/project/google-flow-downloader/
+**链接：**
+- 📦 PyPI: https://pypi.org/project/google-flow-downloader/
+- 💻 GitHub: https://github.com/neosun100/google-flow-downloader
 
 ## 快速开始
 

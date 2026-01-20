@@ -21,7 +21,7 @@ dependencies = [
 gflow = "google_flow_downloader.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/google-flow-tools/downloader"
+Homepage = "https://github.com/neosun100/google-flow-downloader"
 
 [tool.setuptools]
 license-files = []
