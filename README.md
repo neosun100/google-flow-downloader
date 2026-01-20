@@ -212,7 +212,7 @@ export GFLOW_PROJECT_ID="项目ID"
 
 从项目 URL 中提取：
 ```
-https://labs.google/fx/tools/flow/project/23497835-f05d-41bd-a0dc-4188c378f521
+https://labs.google/fx/tools/flow/project/YOUR-PROJECT-ID-HERE
                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                                           这就是 Project ID
 ```
